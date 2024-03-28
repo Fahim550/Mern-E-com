@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { stateContext } from "../../../../App";
+import StripePayment from "./StripePayment";
 
 export default function PaymentSection() {
   const [stateData, setStateData] = useContext(stateContext);
@@ -24,7 +25,8 @@ export default function PaymentSection() {
       }
     } catch (error) {
       console.log("error form payment section", error);
-    }  }, []);
+    }
+  }, []);
   const removeToCart = (product) => {
     const email = sessionStorage.getItem("email");
     if (email) {
@@ -214,7 +216,7 @@ export default function PaymentSection() {
               type="text"
               name="price"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={totalPrice}
+              value={Math.round(totalPrice)}
               readOnly
             />
             <label className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -234,15 +236,15 @@ export default function PaymentSection() {
 
           {/* stripe payment section start */}
           {/* <StripePayment money={totalPrice} userInfo={userInfo} /> */}
+          <StripePayment money={totalPrice} userInfo={userInfo}/>
           {/* stripe payment section end */}
 
-
-          <button
+          {/* <button
             onClick={() => submitOrder()}
             className="bg-blue-500 p-2 m-2 rounded-xl text-white font-semibold px-4"
           >
             Submit
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
