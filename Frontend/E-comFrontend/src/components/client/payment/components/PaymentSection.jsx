@@ -216,7 +216,8 @@ export default function PaymentSection() {
               type="text"
               name="price"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value={Math.round(totalPrice)}
+              value={totalPrice}
+              // {Math.round(totalPrice)}
               readOnly
             />
             <label className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -234,8 +235,6 @@ export default function PaymentSection() {
             />
           </form>
 
-          {/* stripe payment section start */}
-          {/* <StripePayment money={totalPrice} userInfo={userInfo} /> */}
           <StripePayment money={totalPrice} userInfo={userInfo}/>
           {/* stripe payment section end */}
 

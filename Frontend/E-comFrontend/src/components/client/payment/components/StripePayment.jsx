@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { loadStripe } from "@stripe/stripe-js";
 import {
-  PaymentElement,
   Elements,
-  useStripe,
+  PaymentElement,
   useElements,
+  useStripe,
 } from "@stripe/react-stripe-js";
-
+import { loadStripe } from "@stripe/stripe-js";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { stateContext } from "../../../../App";
 const CheckoutForm = ({ userInfo }) => {
+  const [stateData, setStateData] = useContext(stateContext);
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -57,17 +58,52 @@ const CheckoutForm = ({ userInfo }) => {
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
     }
+
+    const Products = JSON.parse(sessionStorage.getItem("cartProducts"));
+    const OrderProducts = {
+      email: sessionStorage.getItem("email"),
+      products: Products,
+      address: userInfo.address,
+      orderId:
+        "id" +
+        Math.random()
+          .toString(36)
+          .substring(2, length + 2),
+      payment: userInfo.totalPrice,
+    };
+    console.log("userInfo", userInfo);
+    console.log("OrderProducts", OrderProducts);
+
+    await postData("http://localhost:8080/orders", OrderProducts).then(
+      (response) => {
+        if (response.code == 200) {
+          console.log("Response Data : ", OrderProducts);
+          sessionStorage.setItem("email", OrderProducts.email);
+          sessionStorage.removeItem("cartProducts");
+          setStateData({ ...stateData, products: [] });
+          navigate("/orders");
+        } else {
+          alert("You are not in db You must be valid user");
+        }
+      }
+    );
   };
-  const Products = JSON.parse(sessionStorage.getItem("cartProducts"));
-  const OrderProducts = {
-    email: sessionStorage.getItem("email"),
-    products: Products,
-    address: userInfo.address,
-    orderId:"id"+Math.random().toString(36).substring(2, length+2),
-    payment: userInfo.totalPrice,
-  };
-  console.log("userInfo", userInfo);
-  console.log("OrderProducts", OrderProducts);
+
+  async function postData(url = "", data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
@@ -90,7 +126,7 @@ const stripePromise = loadStripe(
 export default function StripePayment({ money, userInfo }) {
   const options = {
     mode: "payment",
-    amount: money ? Math.round(money) : 0,
+    amount: money ? Math.round(money) : 1,
     currency: "usd",
     // Fully customizable with appearance API.
     appearance: {

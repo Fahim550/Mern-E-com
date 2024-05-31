@@ -8,7 +8,7 @@ export default function Cart() {
   return (
     <div>
       <Navbar />
-      <div className="pt-16 w-10/12 mx-auto ">
+      <div className="pt-16 w-10/12  mx-auto ">
         <SelectedProduct />
         <Footer />
       </div>

@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 // Your mongodb uri
 // Step 1 : 
-const uri = "mongodb+srv://Fahim:Mo6tmiZm6c7FcieK@cluster0.8n34utt.mongodb.net/";
-; // Setup your mongodb uri
+const uri = "mongodb+srv://ahmedfahim2305:HnfOcarIz3ggzUDD@cluster0.3glchz1.mongodb.net/";
+ // Setup your mongodb uri
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -37,7 +37,7 @@ async function run() {
     const yourDBName = 'backend' // please give your database name here
     const db = await client.db(yourDBName)
     // Step 3 : 
-    const userCollection = await db.collection("newuser") // Give your table / collection name
+    const userCollection = await db.collection("users") // Give your table / collection name
     const productCollection = await db.collection("products") // Give your table / collection name
     const orderCollection = await db.collection("orders") // Give your table / collection name
     
@@ -69,7 +69,7 @@ async function run() {
     app.post("/users/validation",jsonParser, async (req, res) => {
       const data = req.body
       console.log("💕data",data);
-      const userCollection = await db.collection("newuser")
+      const userCollection = await db.collection("users")
       const users = await userCollection.findOne({ "email": data.email , "password":data.password});
     console.log("users",users);
       if(users.email){
