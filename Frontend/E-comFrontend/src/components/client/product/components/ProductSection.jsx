@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card"
+import Card from "./Card";
 export default function ProductSection() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -7,7 +7,9 @@ export default function ProductSection() {
   }, []);
 
   async function getProducts() {
-    const response = await fetch("http://localhost:8080/products/");
+    const response = await fetch(
+      "https://mernecombackend.vercel.app/products/"
+    );
     const productResponseData = await response.json();
     console.log("productResponseData", productResponseData.products);
     if (productResponseData.products.length > 0) {

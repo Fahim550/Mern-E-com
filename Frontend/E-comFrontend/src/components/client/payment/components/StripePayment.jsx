@@ -74,19 +74,20 @@ const CheckoutForm = ({ userInfo }) => {
     console.log("userInfo", userInfo);
     console.log("OrderProducts", OrderProducts);
 
-    await postData("http://localhost:8080/orders", OrderProducts).then(
-      (response) => {
-        if (response.code == 200) {
-          console.log("Response Data : ", OrderProducts);
-          sessionStorage.setItem("email", OrderProducts.email);
-          sessionStorage.removeItem("cartProducts");
-          setStateData({ ...stateData, products: [] });
-          navigate("/orders");
-        } else {
-          alert("You are not in db You must be valid user");
-        }
+    await postData(
+      "https://mernecombackend.vercel.app/orders",
+      OrderProducts
+    ).then((response) => {
+      if (response.code == 200) {
+        console.log("Response Data : ", OrderProducts);
+        sessionStorage.setItem("email", OrderProducts.email);
+        sessionStorage.removeItem("cartProducts");
+        setStateData({ ...stateData, products: [] });
+        navigate("/orders");
+      } else {
+        alert("You are not in db You must be valid user");
       }
-    );
+    });
   };
 
   async function postData(url = "", data = {}) {

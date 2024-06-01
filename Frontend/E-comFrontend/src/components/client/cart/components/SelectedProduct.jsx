@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { stateContext } from "../../../../App";
 import Card from "./Card";
-import { Link } from "react-router-dom";
 
 export default function SelectedProduct() {
   const [stateData, setStateData] = useContext(stateContext);
@@ -11,7 +11,9 @@ export default function SelectedProduct() {
   }, []);
 
   async function getProducts() {
-    const response = await fetch("http://localhost:8080/products/");
+    const response = await fetch(
+      "https://mernecombackend.vercel.app/products/"
+    );
     const productResponseData = await response.json();
     console.log("productResponseData", productResponseData.products);
     if (productResponseData.products.length > 0) {

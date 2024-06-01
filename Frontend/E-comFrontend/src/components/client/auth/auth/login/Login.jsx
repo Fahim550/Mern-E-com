@@ -1,7 +1,7 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../../config/firebase.config";
 
 export default function Login() {
@@ -27,17 +27,18 @@ export default function Login() {
   };
 
   const checkingUserInTheDB = async (data) => {
-    await postData("http://localhost:8080/users/validation", data).then(
-      (response) => {
-        if(response.code == 200){
-            console.log("Response Data : ", data);
-            sessionStorage.setItem("email", data.email);
-            navigate("/home");
-        }else{
-            alert("You are not in db You must be valid user")
-        }
+    await postData(
+      "https://mernecombackend.vercel.app/users/validation",
+      data
+    ).then((response) => {
+      if (response.code == 200) {
+        console.log("Response Data : ", data);
+        sessionStorage.setItem("email", data.email);
+        navigate("/home");
+      } else {
+        alert("You are not in db You must be valid user");
       }
-    );
+    });
   };
 
   async function postData(url = "", data = {}) {
@@ -82,7 +83,7 @@ export default function Login() {
               >
                 <div>
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Your email
@@ -99,7 +100,7 @@ export default function Login() {
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
@@ -127,7 +128,7 @@ export default function Login() {
                     </div>
                     <div className="ml-3 text-sm">
                       <label
-                        for="remember"
+                        htmlFor="remember"
                         className="text-gray-500 dark:text-gray-300"
                       >
                         Remember me

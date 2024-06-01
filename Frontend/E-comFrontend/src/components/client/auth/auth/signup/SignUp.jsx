@@ -1,4 +1,3 @@
-import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -13,7 +12,7 @@ export default function SignIn() {
     watch,
     formState: { errors },
   } = useForm();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const onRegisterUser = async (data) => {
     // console.log("createUserWithEmailAndPassword", data);
     await createUserWithEmailAndPassword(auth, data.email, data.password)
@@ -27,14 +26,16 @@ export default function SignIn() {
       .catch((error) => {
         // ..
         console.error("error form sign up", error);
-        alert("please give another email this email already used")
+        alert("please give another email this email already used");
       });
   };
   const saveUserToDb = async (data) => {
-    await postData("http://localhost:8080/users", data).then((data) => {
-      console.log("responseData", data); // JSON data parsed by `data.json()` call
-      navigate("/login")
-    });
+    await postData("https://mernecombackend.vercel.app/users", data).then(
+      (data) => {
+        console.log("responseData", data); // JSON data parsed by `data.json()` call
+        navigate("/login");
+      }
+    );
   };
   async function postData(url = "", data = {}) {
     // Default options are marked with *

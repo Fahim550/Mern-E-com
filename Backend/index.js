@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 // Your mongodb uri
 // Step 1 : 
@@ -45,7 +46,7 @@ async function run() {
 
     // user CRUD operations 
     app.get("/", (req, res) => {
-      res.send("Your backend is start working 🧑‍💻...");
+      res.send("Your backend  start working 🧑‍💻...");
     });
     //  users crud operations [admin - client ]
     app.get("/users", async (req, res) => {
