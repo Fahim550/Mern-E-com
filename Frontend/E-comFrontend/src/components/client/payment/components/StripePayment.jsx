@@ -75,7 +75,7 @@ const CheckoutForm = ({ userInfo }) => {
     console.log("OrderProducts", OrderProducts);
 
     await postData(
-      "https://mern-e-com-xi.vercel.app/orders",
+      "https://mern-e-com-one.vercel.app/orders",
       OrderProducts
     ).then((response) => {
       if (response.code == 200) {
