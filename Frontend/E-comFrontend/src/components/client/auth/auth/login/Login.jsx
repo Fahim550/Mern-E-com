@@ -28,7 +28,7 @@ export default function Login() {
 
   const checkingUserInTheDB = async (data) => {
     await postData(
-      "https://mernecombackend.vercel.app/users/validation",
+      "https://mern-e-com-xi.vercel.app/users/validation",
       data
     ).then((response) => {
       if (response.code == 200) {

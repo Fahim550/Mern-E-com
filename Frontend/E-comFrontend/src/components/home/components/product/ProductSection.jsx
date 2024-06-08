@@ -8,9 +8,7 @@ export default function ProductSection() {
   }, []);
 
   async function getProducts() {
-    const response = await fetch(
-      "https://mernecombackend.vercel.app/products/"
-    );
+    const response = await fetch("https://mern-e-com-xi.vercel.app/products/");
     const productResponseData = await response.json();
     console.log("productResponseData", productResponseData.products);
     if (productResponseData.products.length > 0) {

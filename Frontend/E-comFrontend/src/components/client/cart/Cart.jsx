@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
-import Navbar from "../../shared/navbar/Navbar";
+import React from "react";
 import Footer from "../../shared/footer/Footer";
+import Navbars from "../../shared/navbar/Navbars";
 import SelectedProduct from "./components/SelectedProduct";
-import { stateContext } from "../../../App";
 
 export default function Cart() {
   return (
     <div>
-      <Navbar />
+      <Navbars />
       <div className="pt-16 w-10/12  mx-auto ">
         <SelectedProduct />
         <Footer />

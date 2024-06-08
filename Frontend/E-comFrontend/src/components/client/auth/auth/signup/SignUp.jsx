@@ -30,7 +30,7 @@ export default function SignIn() {
       });
   };
   const saveUserToDb = async (data) => {
-    await postData("https://mernecombackend.vercel.app/users", data).then(
+    await postData("https://mern-e-com-xi.vercel.app/users", data).then(
       (data) => {
         console.log("responseData", data); // JSON data parsed by `data.json()` call
         navigate("/login");
