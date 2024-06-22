@@ -3,9 +3,11 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const dotenv = require('dotenv');
+dotenv.config();
 // Your mongodb uri
 // Step 1 : 
-const uri = "mongodb+srv://ahmedfahim2305:HnfOcarIz3ggzUDD@cluster0.3glchz1.mongodb.net/";
+const uri = process.env.URI;
  // Setup your mongodb uri
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
