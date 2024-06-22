@@ -11,7 +11,9 @@ export default function SelectedProduct() {
   }, []);
 
   async function getProducts() {
-    const response = await fetch("https://mern-e-com-one.vercel.app/products/");
+    const response = await fetch(
+      "https://mern-e-com-4gkd.onrender.com/products/"
+    );
     const productResponseData = await response.json();
     console.log("productResponseData", productResponseData.products);
     if (productResponseData.products.length > 0) {
