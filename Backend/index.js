@@ -9,6 +9,10 @@ dotenv.config();
 // Step 1 : 
 const uri = process.env.URI;
  // Setup your mongodb uri
+ if (!uri) {
+  console.error("MongoDB connection string is not defined. Please set MONGO_URI in your environment variables.");
+  process.exit(1); // Exit the application if the connection string is not defined
+}
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
