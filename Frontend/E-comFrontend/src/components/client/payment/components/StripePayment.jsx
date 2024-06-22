@@ -75,7 +75,7 @@ const CheckoutForm = ({ userInfo }) => {
     console.log("OrderProducts", OrderProducts);
 
     await postData(
-      "https://mern-e-com-4gkd.onrender.com/orders",
+      "https://mern-e-com-27wx.onrender.com/orders",
       OrderProducts
     ).then((response) => {
       if (response.code == 200) {

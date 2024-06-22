@@ -30,7 +30,7 @@ export default function SignIn() {
       });
   };
   const saveUserToDb = async (data) => {
-    await postData("https://mern-e-com-4gkd.onrender.com/users", data).then(
+    await postData("https://mern-e-com-27wx.onrender.com/users", data).then(
       (data) => {
         console.log("responseData", data); // JSON data parsed by `data.json()` call
         navigate("/login");

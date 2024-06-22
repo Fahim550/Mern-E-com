@@ -12,7 +12,7 @@ export default function SelectedProduct() {
 
   async function getProducts() {
     const response = await fetch(
-      "https://mern-e-com-4gkd.onrender.com/products/"
+      "https://mern-e-com-27wx.onrender.com/products/"
     );
     const productResponseData = await response.json();
     console.log("productResponseData", productResponseData.products);
