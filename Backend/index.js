@@ -24,7 +24,9 @@ const client = new MongoClient(uri, {
 
 const app = express();
 app.use(cors());
-
+app.use(cors({
+  origin: 'https://e-commarce02.netlify.app'  // Your frontend URL
+}));
 const port = 8080 || 8088 || 3000 || 3030;
 // create application/json parser
 const jsonParser = bodyParser.json();
