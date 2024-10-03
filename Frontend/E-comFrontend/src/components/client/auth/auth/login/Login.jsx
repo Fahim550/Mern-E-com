@@ -18,6 +18,7 @@ export default function Login() {
         // Signed in
         const user = userCredential.user;
         console.log("Valid user firebase auth:", user);
+        navigate("/home");
         checkingUserInTheDB({ email: data.email, password: data.password });
       })
       .catch((error) => {
@@ -34,7 +35,7 @@ export default function Login() {
       if (response.code == 200) {
         console.log("Response Data : ", data);
         sessionStorage.setItem("email", data.email);
-        navigate("/home");
+        
       } else {
         alert("You are not in db You must be valid user");
       }
